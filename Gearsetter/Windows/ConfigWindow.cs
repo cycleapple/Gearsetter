@@ -10,7 +10,7 @@ internal sealed class ConfigWindow : LWindow
     private readonly Configuration _configuration;
 
     public ConfigWindow(IDalamudPluginInterface pluginInterface, Configuration configuration)
-        : base("Gearsetter - Config###GearsetterConfig", ImGuiWindowFlags.AlwaysAutoResize)
+        : base("Gearsetter - 設定###GearsetterConfig", ImGuiWindowFlags.AlwaysAutoResize)
     {
         _pluginInterface = pluginInterface;
         _configuration = configuration;
@@ -19,7 +19,7 @@ internal sealed class ConfigWindow : LWindow
     public override void DrawContent()
     {
         bool showRecommendationsWhenEnteringGcArea = _configuration.ShowRecommendationsWhenEnteringGcArea;
-        if (ImGui.Checkbox("Show recommendations when entering Grand Company area",
+        if (ImGui.Checkbox("進入大國防聯軍區域時顯示推薦裝備",
                 ref showRecommendationsWhenEnteringGcArea))
         {
             _configuration.ShowRecommendationsWhenEnteringGcArea = showRecommendationsWhenEnteringGcArea;

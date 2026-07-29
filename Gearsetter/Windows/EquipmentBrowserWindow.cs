@@ -46,7 +46,7 @@ internal sealed class EquipmentBrowserWindow : LWindow
         IClientState clientState,
         IChatGui chatGui,
         IDataManager dataManager)
-        : base("Equipment Browser###GearsetterBrowser")
+        : base("裝備瀏覽器###GearsetterBrowser")
     {
         _plugin = plugin;
         _pluginInterface = pluginInterface;
@@ -95,7 +95,7 @@ internal sealed class EquipmentBrowserWindow : LWindow
             UpdateEquipmentCategories();
         }
 
-        if (ImGui.Combo("Class/Job", ref currentClassJob, _classJobNames, _classJobNames.Length))
+        if (ImGui.Combo("職業／特職", ref currentClassJob, _classJobNames, _classJobNames.Length))
         {
             _selectedClassJob = _classJobIds[currentClassJob];
             UpdateEquipmentCategories();
@@ -111,18 +111,18 @@ internal sealed class EquipmentBrowserWindow : LWindow
             currentCategory = 0;
         }
 
-        if (ImGui.Combo("Category", ref currentCategory, _equipmentCategoryNames, _equipmentCategoryNames.Length))
+        if (ImGui.Combo("分類", ref currentCategory, _equipmentCategoryNames, _equipmentCategoryNames.Length))
             _selectedEquipmentCategory = _equipmentCategoryIds[currentCategory];
 
         var itemList = _dataHolder.GetItemList(_selectedClassJob, _selectedEquipmentCategory);
         if (itemList == null)
             return;
 
-        ImGui.Checkbox("Only show items matching your level", ref _onlyShowEquippableItems);
+        ImGui.Checkbox("只顯示符合目前等級的裝備", ref _onlyShowEquippableItems);
         ImGui.SameLine();
-        ImGui.Checkbox("Only show owned items", ref _onlyShowOwnedItems);
+        ImGui.Checkbox("只顯示已持有的裝備", ref _onlyShowOwnedItems);
         ImGui.SameLine();
-        ImGui.Checkbox("Hide normal quality items", ref _hideNormalQualityItems);
+        ImGui.Checkbox("隱藏普通品質裝備", ref _hideNormalQualityItems);
 
         Dictionary<(uint ItemId, bool Hq), List<EquipmentStats>> ownedItems = _plugin.GetAllInventoryItems();
         try
@@ -145,11 +145,11 @@ internal sealed class EquipmentBrowserWindow : LWindow
             if (ImGui.BeginTable("ItemList", 3 + (includeDamage ? 1 : 0) + itemList.SubstatPriorities.Count,
                     ImGuiTableFlags.Borders | ImGuiTableFlags.Resizable))
             {
-                ImGui.TableSetupColumn("Name", ImGuiTableColumnFlags.None, 300);
+                ImGui.TableSetupColumn("名稱", ImGuiTableColumnFlags.None, 300);
                 ImGui.TableSetupColumn("###ItemSource", ImGuiTableColumnFlags.WidthFixed, 20);
-                ImGui.TableSetupColumn("Level", ImGuiTableColumnFlags.WidthFixed, 50);
+                ImGui.TableSetupColumn("等級", ImGuiTableColumnFlags.WidthFixed, 50);
                 if (includeDamage)
-                    ImGui.TableSetupColumn("Damage", ImGuiTableColumnFlags.WidthFixed, 50);
+                    ImGui.TableSetupColumn("物理基本性能", ImGuiTableColumnFlags.WidthFixed, 50);
                 foreach (var substat in itemList.SubstatPriorities)
                     ImGui.TableSetupColumn(_dataHolder.StatNames.GetValueOrDefault(substat, substat.ToString()),
                         ImGuiTableColumnFlags.WidthFixed, 50);

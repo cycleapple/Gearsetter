@@ -1,9 +1,9 @@
 {
   "Name": "Gearsetter",
   "Author": "Liza Carvelli",
-  "Punchline": "Find gear upgrades",
-  "Description": "Browse through all gear pieces available for each class/job and show possible upgrades",
-  "RepoUrl": "https://git.carvel.li/liza/Gearsetter",
+  "Punchline": "尋找可升級的裝備",
+  "Description": "瀏覽各職業可取得的裝備，並顯示可能的升級選項。",
+  "RepoUrl": "https://github.com/cycleapple/Gearsetter",
   "IconUrl": "https://plugins.carvel.li/icons/Gearsetter.png",
   "Tags": [
     "gearset",
